@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <!--1、if-else判断-->
+    <div v-if="Math.random() > 0.5">
+        Now you see me
+    </div>
+    <div v-else>
+        Now you don't
+    </div>
+    <!--1、else if判断-->
+    <div v-if="type === 'A'">
+        A
+    </div>
+    <div v-else-if="type === 'B'">
+        B
+    </div>
+    <div v-else-if="type === 'C'">
+        C
+    </div>
+    <div v-else>
+        Not A/B/C
+    </div>
+    <h1 v-show="ok">Hello!</h1>
+</div>
+<ul id="example-1">
+    <li v-for="item in items">
+        {{ item.message }}
+    </li>
+</ul>
+<div id="tstt"></div>
+<my-checkbox v-model="foo" value="some value"></my-checkbox>
+<script src="libs/vue.js"></script>
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            type: 'B',
+            ok: true//更改改变h1显示与否
+            //v-if 是“真正”的条件渲染，因为它会确保在切换过程中条件块内的事件监听器和子组件适当地被销毁和重建。
+            //v-if 也是惰性的：如果在初始渲染时条件为假，则什么也不做——直到条件第一次变为真时，才会开始渲染条件块。
+            //相比之下，v-show 就简单得多——不管初始条件是什么，元素总是会被渲染，并且只是简单地基于 CSS 进行切换。
+            //一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好；如果在运行时条件很少改变，则使用 v-if 较好。
+        },
+        computed: {},
+        methods: {
+        }
+    });
+    var example1 = new Vue({
+        el: '#example-1',
+        data: {
+            items: [
+                { message: 'Foo' },
+                { message: 'Bar' }
+            ]
+        }
+    })
+
+    var ss = Vue.extend({
+        template : '<p>{{firstName}} {{lastName}} aka {{alias}}</p>',
+        data:function () {
+         return{
+           firstName:'walter',
+           lastName:'white',
+           alias:'hailin'
+       }
+   }
+    })
+    new ss().$mount('#tstt')
+
+    Vue.component('my-checkbox',{
+        model:{
+            prop:'checked',
+            event:'change'
+        },
+        props:{
+            value:String,
+            checked:{
+                type:Number,
+                default:0
+            }
+        },
+    })
+</script>
+</body>
+</html>

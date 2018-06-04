@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/vuesystem.css">
+</head>
+<body>
+<div class="header">
+    <h1>vue模拟管理系统</h1>
+    <ul>
+        <li><a href="#">用户管理</a></li>
+        <li><a href="#">商品管理</a></li>
+        <li><a href="#">资源管理</a></li>
+        <li><a href="#">物资管理</a></li>
+        <li><a href="#">系统管理</a></li>
+    </ul>
+</div>
+<div class="container">
+    <div id="table">
+        <div class="search">
+            <input type="text" class="searchBox" v-model="searchVal">
+            <button class="btn">搜 索</button>
+        </div>
+        <div class="add">
+            <input type="text" v-model="addDetail.title" name="title" value="" placeholder="标题"/>
+            <input type="text" v-model="addDetail.user" name="user" value="" placeholder="发布人"/>
+            <input type="date" v-model="addDetail.dates" name="date" value="" placeholder="发布时间"/>
+            <button @click="adddetail">新增</button>
+        </div>
+        <table cellpadding="0" cellspacing="0">
+            <thead>
+            <tr>
+                <th>序号</th>
+                <th>标题</th>
+                <th>发布人</th>
+                <th>发布时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item,index) in newsList">
+                <td width="5%">{{index+1}}</td>
+                <td>{{item.title}}</td>
+                <td width="10%">{{item.user}}</td>
+                <td width="15%">{{item.dates}}</td>
+                <td width="10%"><span @click="deletelist(item.id,index)" class="delete">删除</span><span class="edit"
+                                                                                                       @click="edit(item)">编辑</span>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div id="mask" v-if="editlist">
+            <div class="mask">
+                <div class="title">
+                    编辑
+                    <span @click="editlist=false">
+							X
+						</span>
+                </div>
+                <div class="content">
+                    <input type="text" v-model="editDetail.title" name="title" value="" placeholder="标题"/>
+                    <input type="text" v-model="editDetail.user" name="user" value="" placeholder="发布人"/>
+                    <input type="date" v-model="editDetail.dates" name="date" value="" placeholder="发布时间"/>
+                    <button @click="update">更新</button>
+                    <button @click="editlist=false">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nav">
+    <ul>
+        <li class="nav-item">
+            <a href="javascript:;"><span>实习信息统计</span></a>
+            <ul>
+                <li><a href="javascript:;"><span>网站设置</span></a></li>
+                <li><a href="javascript:;"><span>友情链接</span></a></li>
+                <li><a href="javascript:;"><span>分类管理</span></a></li>
+                <li><a href="javascript:;"><span>系统日志</span></a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:;"><span>单位所属行业</span></a>
+            <ul>
+                <li><a href="javascript:;"><span>站内新闻</span></a></li>
+                <li><a href="javascript:;"><span>站内公告</span></a></li>
+                <li><a href="javascript:;"><span>登录日志</span></a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:;"><span>实习信息审核</span></a>
+            <ul>
+                <li><a href="javascript:;"><span>订单列表</span></a></li>
+                <li><a href="javascript:;"><span>网站设置</span></a></li>
+                <li><a href="javascript:;"><span>系统日志</span></a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:;"><span>审批信息查询</span></a>
+            <ul>
+                <li><a href="javascript:;"><span>订单列表</span></a></li>
+                <li><a href="javascript:;"><span>系统日志</span></a></li>
+                <li><a href="javascript:;"><span>系统日志</span></a></li>
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a href="javascript:;"><span>问卷分析</span></a>
+            <ul>
+                <li><a href="javascript:;"><span>订单列表</span></a></li>
+                <li><a href="javascript:;"><span>系统日志</span></a></li>
+                <li><a href="javascript:;"><span>系统日志</span></a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<footer>
+    <ul>
+        <li>VUE框架管理系统测试@IFLYTEK.科大讯飞性能测试</li>
+    </ul>
+</footer>
+<script src="../../js/dw-jquery.js"></script>
+<script src="libs/vue.js"></script>
+<script src="js/vuesystem.js"></script>
+</body>
+</html>
